@@ -167,6 +167,7 @@ MonoBehaviour:
   - {r: 0.7587177, g: 0.8037735, b: 0.07734423, a: 1}
   - {r: 0.19286466, g: 0, b: 0.5018867, a: 1}
   - {r: 1, g: 0, b: 0.8608427, a: 1}
+  pickupSFX: {fileID: 8300000, guid: f80119c97578ff149baace751e3f1a1b, type: 3}
 --- !u!95 &4142531002501696987
 Animator:
   serializedVersion: 5

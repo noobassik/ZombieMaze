@@ -6,6 +6,7 @@ public class Gem : MonoBehaviour
 {
     public Mesh[] allGems;
     public Color[] allColors;
+    public AudioClip pickupSFX;
 
     private void Start()
     {
@@ -17,6 +18,7 @@ public class Gem : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            AudioManager.instance.PlaySFX(pickupSFX);
             Destroy(gameObject);
         }
     }
