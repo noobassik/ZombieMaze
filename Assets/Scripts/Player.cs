@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public AudioSource footSteps;
+    public AudioClip screamSFX;
 
 
     public float speed = 5;
@@ -20,7 +21,7 @@ public class Player : MonoBehaviour
     public float turnSmoothTime = 0.1f;
     private float turnSmoothVelocity;
 
-
+    private bool canMove = true;
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -30,8 +31,11 @@ public class Player : MonoBehaviour
     
     void Update()
     {
-        MovementCheck();
-        AnimationCheck();
+        if (canMove) 
+        {
+			MovementCheck();
+			AnimationCheck();
+		}
     }
 
 
@@ -68,4 +72,14 @@ public class Player : MonoBehaviour
         }
     }
 
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.CompareTag("Zombie"))
+        {
+            canMove = false;
+            UIManager.instance.ShowGameOver(false);
+            AudioManager.instance.PlaySFX(screamSFX);
+            anim.SetTrigger("isDead");
+        }
+	}
 }

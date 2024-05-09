@@ -18,6 +18,7 @@ public class Gem : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            MapBulder.instance.GemPickedUp();
             AudioManager.instance.PlaySFX(pickupSFX);
             Destroy(gameObject);
         }

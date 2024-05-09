@@ -7,7 +7,9 @@ public class MapBulder : MonoBehaviour
     public Texture2D[] maps;
     public GameObject wallPrefab;
     public GameObject gemPrefab;
-    public GameObject zoombiePrefab;
+    public GameObject zombiePrefab;
+
+    public bool zombiesCanMove = true;
 
     private Texture2D selectedMap;
 
@@ -17,6 +19,7 @@ public class MapBulder : MonoBehaviour
 
     public static MapBulder instance;
 
+    private int gemsRemaining;
     private void Awake()
     {
         if (instance == null)
@@ -34,6 +37,7 @@ public class MapBulder : MonoBehaviour
     {
         GenerateNewMap();
         GenerateGems();
+        GenerateZoombies();
     }
 
     public void GenerateNewMap()
@@ -70,8 +74,13 @@ public class MapBulder : MonoBehaviour
 
     private void GenerateZoombies()
     {
-
-    }
+		for (int i = 0; i < 7; i++)
+		{
+			int index = Random.Range(0, openPositions.Count);
+			Instantiate(zombiePrefab, openPositions[index], Quaternion.identity);
+			openPositions.RemoveAt(index);
+		}
+	}
 
     private void GenerateGems()
     {
@@ -81,10 +90,22 @@ public class MapBulder : MonoBehaviour
             Instantiate(gemPrefab, openPositions[index], Quaternion.identity);
             openPositions.RemoveAt(index);
         }
-
-
+        gemsRemaining = 5;
     }
 
+    public Vector3 GetRandomPos() 
+    {
+        return openPositions[Random.Range(0, openPositions.Count)];
+    }
 
+    public void GemPickedUp()
+    {
+        gemsRemaining--;
 
+        if (gemsRemaining == 0)
+        {
+            zombiesCanMove = false;
+            UIManager.instance.ShowGameOver(true);
+        }
+    }
 }
