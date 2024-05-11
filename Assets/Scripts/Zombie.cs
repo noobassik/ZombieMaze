@@ -11,7 +11,7 @@ public class Zombie : MonoBehaviour
 
 	public AudioSource groanSFX;
 
-	private Animator anim;
+	static public Animator anim;
 
 	private bool isWalking;
 	private bool isRunning;

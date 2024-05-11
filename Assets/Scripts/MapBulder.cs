@@ -106,6 +106,10 @@ public class MapBulder : MonoBehaviour
         {
             zombiesCanMove = false;
             UIManager.instance.ShowGameOver(true);
+            Player.canMove = false;
+            Player.anim.SetBool("isRunning", false);
+            Zombie.anim.SetBool("isRunnig", false);
+            Zombie.anim.SetBool("isWalking", false);
         }
     }
 }

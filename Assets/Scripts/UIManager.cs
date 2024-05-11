@@ -32,6 +32,14 @@ public class UIManager : MonoBehaviour
 
 	public void PlayAgain()
 	{
-		SceneManager.LoadScene(0);
+		SceneManager.LoadScene(1);
+		Player.canMove = true;
 	}
+
+	public void Exit()
+	{
+		SceneManager.LoadScene(0);
+        Player.canMove = true;
+
+    }
 }

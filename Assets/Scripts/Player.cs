@@ -1,3 +1,5 @@
+using Palmmedia.ReportGenerator.Core;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +12,7 @@ public class Player : MonoBehaviour
 
     public float speed = 5;
     private CharacterController controller;
-    private Animator anim;
+    static public Animator anim;
 
     private bool isMoving;
 
@@ -21,7 +23,7 @@ public class Player : MonoBehaviour
     public float turnSmoothTime = 0.1f;
     private float turnSmoothVelocity;
 
-    private bool canMove = true;
+    static public bool canMove = true;
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -78,8 +80,11 @@ public class Player : MonoBehaviour
         {
             canMove = false;
             UIManager.instance.ShowGameOver(false);
+            
             AudioManager.instance.PlaySFX(screamSFX);
-            anim.SetTrigger("isDead");
+            anim.SetTrigger("isDead");            
+            
         }
 	}
+    
 }
